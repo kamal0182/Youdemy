@@ -1,6 +1,10 @@
 <?php 
-include "../DAOs/GeneralDao.php" ;
-class User extends GeneralDao {
+// include "../DAOs/GeneralDao.php" ;
+namespace App\Models;
+
+use App\DAOs\GeneralDao;
+
+class User extends GeneralDao{
     private $id ; 
     private $fisrtname ; 
     private $lastname ; 
@@ -31,15 +35,17 @@ class User extends GeneralDao {
                 $this->email = $arguments[1];
                 $this->email = $arguments[2];
             }
-            if(count($arguments) == 6 ){
-                $this->id = $arguments[0];
-                $this->fisrtname = $arguments[1];   
-                $this->lastname = $arguments[2];
-                 $this->email = $arguments[3];
-                 $this->password = $arguments[4];
-                 $this->role = $arguments[5] ;
-            }
             if(count($arguments) == 7 ){
+
+                $this->fisrtname = $arguments[0];   
+                $this->lastname = $arguments[1];
+                 $this->email = $arguments[2];
+                 $this->password = $arguments[3];
+                 $this->role = $arguments[4] ;
+                 $this->situation = $arguments[5];
+                 $this->photo = $arguments[6];
+            }
+            if(count($arguments) == 8){
                 $this->id = $arguments[0];
                 $this->fisrtname = $arguments[1];   
                 $this->lastname = $arguments[2];
@@ -47,15 +53,17 @@ class User extends GeneralDao {
                  $this->password = $arguments[4];
                  $this->role = $arguments[5] ;
                  $this->situation = $arguments[6];
+                 $this->photo = $arguments[7];
             }
         }
     }
     public function tableName() {
-        return  __CLASS__;
+        return  "User";
     }
     public function columns(): array
     {
-       return ["fisrtname"=>$this->fisrtname,"lastname"=>$this->lastname,"email"=>$this->email,"password"=>$this->password,"id_role"=>$this->role->getName()];    
+       return ["fisrtname"=>$this->fisrtname,"lastname"=>$this->lastname,"email"=>$this->email,"password"=>$this->password,
+    "photo"=>$this->photo,"station"=>$this->situation,"id_role"=>$this->role->getId()];    
     }
     public function SetId($id){
         $this->id = $id ;

@@ -1,32 +1,24 @@
 <?php
 // include_once "./../Models/Role.php";
-include_once "./../Models/User.php";
-include_once "./../Services/UserService.php";
+// include_once "../app/Controllers/RoleController.php";
+// ;
+// include_once "./../Models/User.php";
+// include_once "./../Services/UserService.php";
+namespace App\Controllers;
+
+use App\Models\Role;
+use App\Models\User;
+use App\Services\UserService as ServicesUserService;
+use Exception;
 
 class UserController {
     private User $user ;
-    private UserService $userservice ;
+    private ServicesUserService $userservice ;
     // private GeneralDao $generalrepository ;
     public function __construct() {
-        $this->userservice = new UserService();
+        $this->userservice = new ServicesUserService();
     }
-    // public function createUser(){
-    //     $firstname = "";
-    //     $lastname = "kamal"; 
-    //     $email = "adminsssdsd@example.com";
-    //     $password = "1234";
-    //     $rolename = "Student";
-    //     $role = new Role ; 
-    //     $role->constructor($rolename);
-    //     $user = new User;
-    //     $user->Construct($firstname , $lastname , $email , $password );
-    //      try {
-    //         $this->userservice->create($user);
-    //      }
-    //      catch(Exception $e){
-    //         echo $e->getMessage();
-    //      }
-    // }
+
     public function getAllUsers(){
         try {
             $user = new user ;
@@ -37,7 +29,6 @@ class UserController {
          }
     }
 }
-$con = new UserController ;
- $con->getAllUsers() ;
+
 
 ?>

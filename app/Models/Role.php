@@ -1,5 +1,10 @@
 <?php 
-include_once "../DAOs/GeneralDao.php" ;
+// include_once "../DAOs/GeneralDao.php" ;
+// include_once "../app/Models/Role.php";
+namespace App\Models;
+
+use App\DAOs\GeneralDao;
+
 class Role extends GeneralDao{
     private int  $id ; 
     private string $name ;
@@ -7,6 +12,9 @@ class Role extends GeneralDao{
     public function __construct(){}
     public   function __call($name, $arguments){
         if($name == "constructor"){
+            if(count($arguments)==1){
+                $this->name = $arguments[0];
+            }
             // if(count($argu+ments)==5){
             //     $this->fisrtname = $arguments[0];
             //     $this-> = $arguments[0];
@@ -30,7 +38,7 @@ class Role extends GeneralDao{
         }
     }
     public function tableName(): string {
-        return __CLASS__;
+        return "Role";
     }
     public function columns(): array
     {

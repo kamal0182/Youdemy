@@ -1,6 +1,9 @@
 <?php
-include_once "../Repositories/GenaralRepo.php";
-class   RoleService {
+namespace App\Services;
+use App\Models\Role;
+use App\Repositories\GenaraleRepo;
+
+class RoleService {
     private  GenaraleRepo $generalrepository ;
     private Role $role  ;
     public function __construct() {
@@ -16,21 +19,18 @@ class   RoleService {
      return $role ;
     }
     public function findByName($role_name){
+        echo $role_name; 
         return  $this->generalrepository->foundByName($role_name, "roles");
     }
     public function create($role){
-        // var_dump($role);
         if(!empty($role->getname())){
             if(!empty($role->getDescription())){
                 
             $role->setId($this->generalrepository->create($role));
-          
-           return $role ; 
+            return $role ;
             }
         }
-        else{
-            echo "Adcasdcas";
-        }
+        
     }
 }
   
