@@ -30,7 +30,7 @@ class GenaraleRepo{
       // var_dump($table);
         foreach($this->classes as $key=>$value){
             if($table == $key){
-              // echo $table ;
+             
                 return $value ; 
             }
         }
@@ -44,11 +44,6 @@ class GenaraleRepo{
          $stmt->execute();
          $result = $stmt->fetchObject($this->checkclass($table));
         return $result ;
-            // return $result ;
-        
-        // else {
-        //     return "Not found";
-        // }
     }
     public function foundByName($name ,$table){
         $this->db = new Database();
@@ -62,7 +57,7 @@ class GenaraleRepo{
     }   
     public function foundByEmail($email,$table){
       $this->db = new Database();
-      $sql = "SELECT id FROM {$table} WHERE email  = '" .$email  ."';" ;
+      $sql = "SELECT *  FROM {$table} WHERE email  = '" .$email  ."';" ;
       $stmt =  $this->db->connection()->prepare($sql);
       // echo $sql; 
        $stmt->execute();

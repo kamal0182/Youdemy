@@ -2,18 +2,26 @@
 namespace App\Models;
 
 class Inscription {
-    private $id ; 
+    private int  $id ; 
     private Cours $cour ;
     private User $Etudiants ;
-    public function __construct(Cours $cours , User $Etudiants, $id)
+    public function __construct() 
     {
-        $this->cour = $cours ; 
-        $this->Etudiants = $Etudiants ;
-        $this->id = $id ; 
+        // $this->cour = $cours ; 
+        // $this->Etudiants = $Etudiants ;
+    }
+    public function __call($name, $arguments)
+    {
+        if($name == "Construct"){
+            if($arguments == 2 ){
+                $this->cour = $arguments[0];
+                $this->Etudiants = $arguments[1];
+            }
+        }
     }
     public function SetUser( User $Etudiants){
         $this->Etudiants = $Etudiants ;
-
+        
     }
     public function SetCour( Cours $cour){
         $this->cour = $cour ;

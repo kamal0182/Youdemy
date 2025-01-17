@@ -52,10 +52,14 @@ class UserService{
             
         }
         public function createCourse($cour){
-            $this->courservice->create($cour);
+            // var_dump($this->findUserByEmail($cour->getUser()->getEmail()));
+            // echo ();
+            $cour->setUser($this->findUserByEmail($cour->getUser()->getEmail()));
+         $cour->setCategorie($this->categorieservice->findbyname($cour->getCategorie()->getName()));
+    
+          return   $this->courservice->create($cour);
         }
         public function createCategorie($categorie){
-            
             $this->categorieservice->create($categorie);
         }
         public function findUserById($id){
@@ -65,7 +69,13 @@ class UserService{
             return  $this->generalrepository->foundByName($name,"users");
         }
         public function findUserByEmail($email){
+          
+            
             return  $this->generalrepository->foundByEmail($email,"users");
+        }
+        public function createInscription(){
+            $this->user = new User  ; 
+
         }
  
  

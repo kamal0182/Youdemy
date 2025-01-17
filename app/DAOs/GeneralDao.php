@@ -14,9 +14,9 @@ abstract class GeneralDao {
     private $db ; 
     private  $classes = ["User"=>User::class,
                         "Cours"=>Cours::class ,
-                        "Categorie"=>Categorie::class,
+                        "Categorie"=>Categorie::class ,
                         "Inscription"=>Inscription::class,
-                        "tags"=>Tag::class] ;
+                        "tags"=>Tag::class];
     abstract public function tableName() ;
     abstract public function columns() : array ; 
     public function checkclass (){
@@ -36,6 +36,7 @@ abstract class GeneralDao {
         $sql = "SELECT  * from {$this->matchwithclass()}";
         $stmt =  $this->db->connection()->prepare($sql);
         $stmt->execute();
+        // fetchALL(PDO::FETCH_CLASS, 'person');
        return $stmt->fetchObject($this->checkclass());
     }
     public function create(){
@@ -46,10 +47,10 @@ abstract class GeneralDao {
         $joincloumn1 = implode("','",$arrValues);
         $tablename = $this->tableName();
         $sql = "INSERT INTO {$this->matchwithclass()} ( {$joincloumn}) values ('{$joincloumn1}')" ;
+        echo $sql ;
         $stmt =  $this->db->prepare($sql);
         $stmt->execute();
         return  $this->db->lastInsertId();
-   
     }
     public function delete(){
 

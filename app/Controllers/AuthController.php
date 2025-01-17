@@ -1,6 +1,5 @@
 <?php
 namespace App\Controllers;
-require_once dirname(__DIR__, 3) ."\\vendor\\autoload.php";
 
 use App\Models\Role;
 use App\Models\User;
@@ -16,7 +15,7 @@ use Exception;
     public function createUser(){
         $firstname = "younes";
         $lastname = "kamal"; 
-        $email = "younes@example.com";
+        $email = "amir@example.com";
         $password = "1234";
         $rolename = "Enseignant";
         $situation = "Active";
@@ -33,8 +32,8 @@ use Exception;
          }
     }
  }
-// $auth = new AuthController ; 
-// echo "<pre>";
-// var_dump($auth->createUser());
-// echo "</pre>";
+$auth = new AuthController ; 
+echo "<pre>";
+var_dump($auth->createUser());
+echo "</pre>";
 ?>

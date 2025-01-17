@@ -22,5 +22,9 @@ class TagService {
             echo "Ascascasc";
         }
     }
+    public function findByName($name){
+        var_dump( $this->generalrepository->foundByName($name,"tags"));
+        return  $this->generalrepository->foundByName($name,"tags");
+    }
 }
 ?>

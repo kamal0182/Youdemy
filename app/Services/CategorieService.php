@@ -15,8 +15,7 @@ class CategorieService {
     public function create($category){
         if(!empty($category->getName())){
             if(!empty($category->getDescription())){
-                $id =   $category->setId($this->generalrepository->create($category));
-               
+                $id  = $category->setId($this->generalrepository->create($category));
                 return $id ; 
             }
         }

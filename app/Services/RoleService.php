@@ -15,17 +15,16 @@ class RoleService {
        return  $this->generalrepository->getAllUsers($this->role);
     }
     public function findById($id){
-     $role=    $this->generalrepository->foundById($id,"roles") ;
+     $role = $this->generalrepository->foundById($id,"roles");
      return $role ;
     }
     public function findByName($role_name){
-        echo $role_name; 
+        // echo $role_name; 
         return  $this->generalrepository->foundByName($role_name, "roles");
     }
     public function create($role){
         if(!empty($role->getname())){
             if(!empty($role->getDescription())){
-                
             $role->setId($this->generalrepository->create($role));
             return $role ;
             }

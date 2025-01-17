@@ -18,7 +18,6 @@ class UserController {
     public function __construct() {
         $this->userservice = new ServicesUserService();
     }
-
     public function getAllUsers(){
         try {
             $user = new user ;

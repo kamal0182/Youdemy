@@ -14,11 +14,11 @@ class AuthService {
     public function create($user) :User{
        
         $user->setRole($this->roleservice->findByName($user->getRole()->getname()));
-        
+        // var_dump($user->getRole());
         return $this->generalrepository->create($user);
     }
     public function validation(){
-        return true ; 
+        return true ;
     }
 
 }

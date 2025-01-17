@@ -14,7 +14,7 @@ class Categorie extends GeneralDao{
         if($name == "Construct"){
             
             if(count($arguments) == 1 ){
-                $this->id = $arguments[0];
+                $this->name = $arguments[0];
             }
             if(count($arguments) == 2 ){
                 $this->name = $arguments[0];

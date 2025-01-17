@@ -20,6 +20,9 @@ class User extends GeneralDao{
     public function __call($name, $arguments)
     {
         if($name == "Construct"){
+            if(count($arguments)==1){
+                $this->email = $arguments[0] ;
+            }
             if(count($arguments) == 2 ){
                 $this->email = $arguments[0];
                 $this->password = $arguments[1];
@@ -54,6 +57,12 @@ class User extends GeneralDao{
                  $this->role = $arguments[5] ;
                  $this->situation = $arguments[6];
                  $this->photo = $arguments[7];
+            }
+            
+        }
+        if($name = "constructerWhitId" ){
+            if(count($arguments)==1){
+                $this->id = $arguments[0] ; 
             }
         }
     }

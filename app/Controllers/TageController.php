@@ -21,6 +21,9 @@ class TageController{
         $this->tage->Construct($tagname,$tagdescription);
        return $this->userservice->createTage1($this->tage);
     }
+    public function getallTags(){
+        $this->userservice->createTage1($this->tage);
+    }
 }
 // $tage = new TageController();
 // $tage->createTage();
