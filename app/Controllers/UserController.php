@@ -5,6 +5,7 @@
 // include_once "./../Models/User.php";
 // include_once "./../Services/UserService.php";
 namespace App\Controllers;
+require_once dirname(__DIR__, 3) ."\\vendor\\autoload.php";
 
 use App\Models\Role;
 use App\Models\User;
@@ -27,7 +28,12 @@ class UserController {
             echo $e->getMessage();
          }
     }
+    public function createTag(){
+        // $this->userservice->CreateTags($arraytags);
+    }
 }
+$tag = new UserController();
+$tag->createTag();
 
 
 ?>

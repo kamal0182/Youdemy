@@ -1,6 +1,5 @@
 <?php 
 namespace App\Controllers;
-require_once dirname(__DIR__, 3) ."\\vendor\\autoload.php";
 
 use App\DAOs\TagCourDao;
 use App\Models\Categorie;
@@ -16,7 +15,6 @@ class CoursController {
     private Cours $cour ; 
     private UserService $userservice;
     private CategorieService $categorieservice ; 
-    
     private $id ; 
     public function __construct() {
         $this->cour = new Cours;
@@ -48,11 +46,10 @@ class CoursController {
         $category = $this->categorieservice->findbyname($categoriename);
     }
     public function  modify(){
-        
     }
-   
-
+    public function read(){
+       return  $this->courservice->getAllCourse();
+    }
 }
-$e = new CoursController ;
-$e->create();
+
 ?>

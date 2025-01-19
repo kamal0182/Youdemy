@@ -33,7 +33,7 @@ class UserService{
         $this->categorieservice = new CategorieService ;
     }
     public function getAllUsers($user){
-       return  $this->generalrepository->getAllUsers($user);
+       return  $this->generalrepository->getAll($user);
         // var_dump($users);
         // foreach($users  as $user){
         //     $User = new User ;
@@ -44,19 +44,16 @@ class UserService{
         // }
     }
        
-        public function createTage1($tage){
-        
-            $this->tagservice->create($tage);
+        public function createTage1($arrayofTags){
+           
+            // $this->tagservice->create($tage);
         }
         public function create($course){
             
         }
         public function createCourse($cour){
-            // var_dump($this->findUserByEmail($cour->getUser()->getEmail()));
-            // echo ();
-            $cour->setUser($this->findUserByEmail($cour->getUser()->getEmail()));
-         $cour->setCategorie($this->categorieservice->findbyname($cour->getCategorie()->getName()));
-    
+        $cour->setUser($this->findUserByEmail($cour->getUser()->getEmail()));
+        $cour->setCategorie($this->categorieservice->findbyname($cour->getCategorie()->getName()));
           return   $this->courservice->create($cour);
         }
         public function createCategorie($categorie){
@@ -69,18 +66,17 @@ class UserService{
             return  $this->generalrepository->foundByName($name,"users");
         }
         public function findUserByEmail($email){
-          
-            
             return  $this->generalrepository->foundByEmail($email,"users");
         }
         public function createInscription(){
             $this->user = new User  ; 
-
         }
- 
- 
+        // public function CreateTags($arrayofTags){
+        //     foreach($arrayofTags as $tag){
+        //         $this->tagservice->create($tag);
+        //     }
+        // }
 }
-
 ?>
 
 

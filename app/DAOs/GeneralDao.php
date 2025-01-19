@@ -9,14 +9,15 @@ use App\Models\Cours;
 use App\Models\Inscription;
 use App\Models\Tag;
 use App\Models\User;
+use PDO;
 
 abstract class GeneralDao {
     private $db ; 
     private  $classes = ["User"=>User::class,
                         "Cours"=>Cours::class ,
-                        "Categorie"=>Categorie::class ,
+                        "categorie"=>Categorie::class ,
                         "Inscription"=>Inscription::class,
-                        "tags"=>Tag::class];
+                        "tag"=>Tag::class];
     abstract public function tableName() ;
     abstract public function columns() : array ; 
     public function checkclass (){
@@ -27,8 +28,8 @@ abstract class GeneralDao {
         }
     }
     public function matchwithclass(){
-        $tolowercase = strtolower($this->tableName());
-        $matchwithdatabsename = $tolowercase ."s" ;
+        // $tolowercase = strtolower($this->tableName());
+        $matchwithdatabsename = $this->tableName() ."s" ;
         return $matchwithdatabsename ;
     }
     public function read(){
@@ -36,8 +37,13 @@ abstract class GeneralDao {
         $sql = "SELECT  * from {$this->matchwithclass()}";
         $stmt =  $this->db->connection()->prepare($sql);
         $stmt->execute();
+        // var_dump($this->matchwithclass());
         // fetchALL(PDO::FETCH_CLASS, 'person');
-       return $stmt->fetchObject($this->checkclass());
+    //    return $stmt->fetchObject($this->checkclass());
+    // var_dump($this->checkclass());
+    // $this->tableName();
+     $result =  $stmt->fetchALL(PDO::FETCH_CLASS,$this->checkclass());
+     return $result ;
     }
     public function create(){
         $this->db = (new DbDatabase())->connection();
@@ -47,7 +53,7 @@ abstract class GeneralDao {
         $joincloumn1 = implode("','",$arrValues);
         $tablename = $this->tableName();
         $sql = "INSERT INTO {$this->matchwithclass()} ( {$joincloumn}) values ('{$joincloumn1}')" ;
-        echo $sql ;
+        
         $stmt =  $this->db->prepare($sql);
         $stmt->execute();
         return  $this->db->lastInsertId();
@@ -56,7 +62,10 @@ abstract class GeneralDao {
 
     }
     public function update(){
-
+        $updatearray = [];
+        foreach($this->columns() as $key=>$value){
+            $updatearray []  =  $key  ." = '" .$value ."'";
+        }
     }
      
 }

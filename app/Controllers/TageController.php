@@ -1,9 +1,10 @@
 <?php
 namespace App\Controllers;
 
-
+require_once dirname(__DIR__, 3) ."\\vendor\\autoload.php";
 
 use App\Models\Tag;
+use App\Services\TagService;
 use App\Services\UserService;
 
 // include_once "../Services/UserService.php";/
@@ -11,6 +12,7 @@ use App\Services\UserService;
 class TageController{
     public UserService $userservice ; 
     private Tag $tage ; 
+    private TagService $tagservice ;
     public function __construct(){
         $this->tage = new Tag();
         $this->userservice = new UserService;
@@ -22,9 +24,10 @@ class TageController{
        return $this->userservice->createTage1($this->tage);
     }
     public function getallTags(){
-        $this->userservice->createTage1($this->tage);
+       return  $this->tagservice->getallTags();
     }
+
 }
-// $tage = new TageController();
-// $tage->createTage();
+$tage = new TageController();
+$tage->getallTags();
 ?>

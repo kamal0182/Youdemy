@@ -25,8 +25,15 @@ class CategorieService {
     }
     public function  findbyname($name){
        return  $this->generalrepository->foundByName($name,"categories");
-
-
+    }
+    public function findById($id) {
+        return  $this->generalrepository->foundById($id,"categories");
+    }
+    public function read(){
+        return $this->generalrepository->getAll($this->categorie);
+    }
+    public function findOne($id){
+       return $this->generalrepository->foundById($id,"categorie");
     }
 }
 ?> 

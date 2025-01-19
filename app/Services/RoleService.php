@@ -12,7 +12,7 @@ class RoleService {
     }
     public function getallRolles(){
         
-       return  $this->generalrepository->getAllUsers($this->role);
+       return  $this->generalrepository->getAll($this->role);
     }
     public function findById($id){
      $role = $this->generalrepository->foundById($id,"roles");

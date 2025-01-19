@@ -28,7 +28,7 @@ class Categorie extends GeneralDao{
         }
     }
     public function tablename(){
-        return "Categorie" ;
+        return "categorie" ;
     }
     public function columns(): array{
         return ["name"=>$this->name, "description"=>$this->description];

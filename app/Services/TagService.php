@@ -14,17 +14,22 @@ class TagService {
         if(!empty($tage->getName())){
             if(!empty($tage->getDescription())){
                 $id =   $tage->setId($this->generalrepository->create($tage));
-                echo $id ; 
-                return $id ; 
+                return $id ;
             }
         }
         else{
-            echo "Ascascasc";
+            echo "empty tag";
         }
     }
     public function findByName($name){
-        var_dump( $this->generalrepository->foundByName($name,"tags"));
+        // var_dump( $this->generalrepository->foundByName($name,"tags"));
         return  $this->generalrepository->foundByName($name,"tags");
+    }
+    public function findById($id){
+        return  $this->generalrepository->foundById($id,"tags");
+    }
+   public function  getAllTags(){
+   return  $this->generalrepository->getAll($this->tag);
     }
 }
 ?>

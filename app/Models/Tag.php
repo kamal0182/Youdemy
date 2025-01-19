@@ -27,11 +27,12 @@ class Tag extends GeneralDao{
         }
     }
     public function tablename(){
-        return "tags" ;
+        return "tag" ;
     }
     public function columns(): array{
         return ["name"=>$this->name, "description"=>$this->description];
     }
+   
     public function getId(){
         return $this->id ;
     }

@@ -19,7 +19,8 @@ class GenaraleRepo{
     "Inscription"=>Inscription::class,
     "tags"=>Tag::class,
     "roles"=>Role::class] ;
-    public function getAllUsers($table){
+    public function getAll($table){
+    //  echo get_class($table);
       return $table->read() ;
     }
     public function create($class){
@@ -43,6 +44,7 @@ class GenaraleRepo{
         $stmt =  $this->db->connection()->prepare($sql);
          $stmt->execute();
          $result = $stmt->fetchObject($this->checkclass($table));
+        //  var_dump($result);
         return $result ;
     }
     public function foundByName($name ,$table){
@@ -63,6 +65,16 @@ class GenaraleRepo{
        $stmt->execute();
        $result = $stmt->fetchObject($this->checkclass($table));
       return $result ;
+    }
+    public function findEmailAndPassword($email ,$password) {
+      $this->db = new Database();
+      $sql = "SELECT *  FROM users WHERE email  = '" .$email  ."' AND password =  '" .$password ."';" ;
+      // echo $sql;
+      $stmt =  $this->db->connection()->prepare($sql);
+      // echo $sql; 
+       $stmt->execute();
+       return $stmt->fetchObject(User::class);
+       
     }
 }
 

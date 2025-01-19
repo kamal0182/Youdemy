@@ -12,13 +12,15 @@ class Cours extends GeneralDao{
     private Categorie $categorie ;
     private array $tags ;
     private string $logo ;
+    private int $categorie_id ; 
+    private int $user_id ;
     private array $inscriptions ;
     private static string  $checkcontenu ;
     public function __construct() {}
     public function __call ($name , $arguments){
         if($name == "Construct"){
             if(count($arguments) == 1 ){
-                $this->id =  $arguments[0] ; 
+                $this->id =  $arguments[0] ;
             }
             if(count($arguments)== 7){
                 $this->title = $arguments[0];
@@ -35,7 +37,7 @@ class Cours extends GeneralDao{
     }
     public function tableName():string
     {
-        return"cour";
+        return"Cour";
     }
     public function columns():array{
         return ["title"=>$this->title,"description"=>$this->description,"contenu"=>$this->contenu,
@@ -44,6 +46,18 @@ class Cours extends GeneralDao{
 
     public function getCheckContenu(){
         return self::$checkcontenu ;
+    }
+    public function getCategorieId(){
+        return $this->categorie_id ; 
+    }
+    public function setTags(array $tags){
+        $this->tags = $tags;
+    }
+    public function getUserId(){
+        return $this->user_id;
+    }
+    public function getId(){
+        return $this->id ; 
     }
     public function getTittle(){
         return $this->title ;
@@ -63,7 +77,7 @@ class Cours extends GeneralDao{
     public function getUser(){
         return $this->Enseignant;
     }
-    public function setUser($Enseignant){
+    public function setUser(User $Enseignant){
         $this->Enseignant = $Enseignant ;
     }
     public function getCategorie(){
@@ -73,9 +87,9 @@ class Cours extends GeneralDao{
     public function setCategorie($categorie){
          $this->categorie = $categorie ; 
     }
-    public function getId(){
-        return $this->id ; 
-    }
+    // public function getId(){
+    //     return $this->id ; 
+    // }
     public function getTags(){
         return $this->tags ;
     }

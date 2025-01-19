@@ -15,7 +15,7 @@ class InscriptionController{
     {
         $this->userservice = new UserService ;
         $this->inscription = new Inscription() ; 
-        $this->iscriptionservice = new InscriptionService ;
+        // $this->iscriptionservice = new InscriptionService ;
     }
     public function create(){
         $iduser = 1 ; 
