@@ -1,5 +1,6 @@
 <?php 
 namespace App\Controllers;
+require_once dirname(__DIR__, 3) ."\\vendor\\autoload.php";
 
 use App\DAOs\TagCourDao;
 use App\Models\Categorie;
@@ -17,7 +18,7 @@ class CoursController {
     private CategorieService $categorieservice ; 
     private $id ; 
     public function __construct() {
-        $this->cour = new Cours;
+        $this->cour = new Cours ;
         $this->courservice = new CoursService ;
         $this->userservice = new UserService ;
         $this->categorieservice = new CategorieService ; 
@@ -40,7 +41,7 @@ class CoursController {
         $logo = "photo.png";
         $user = new User ;
         $user->Construct($useremail);
-        ($this->cour->Construct($title,$Categorie,$desciption,$contenu,$user,$logo,$tagarray));
+        $this->cour->Construct($title,$Categorie,$desciption,$contenu,$user,$logo,$tagarray);
         return  $this->userservice->createCourse($this->cour);
         $user = $this->userservice->findUserByEmail($useremail);
         $category = $this->categorieservice->findbyname($categoriename);
@@ -49,7 +50,9 @@ class CoursController {
     }
     public function read(){
        return  $this->courservice->getAllCourse();
-    }
+        }
 }
+$com = new CoursController ;
+// var_dump($com->read());
 
 ?>

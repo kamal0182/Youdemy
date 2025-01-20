@@ -43,6 +43,8 @@ class CoursService {
                 $categorie = new Categorie ;
                 $categorieservice= new CategorieService ;
                 $userservice = new UserService ;
+               
+                // var_dump($userservice->findUserById($cour->getUserId()));
                 $cour->setUser($userservice->findUserById($cour->getUserId()));
                 $cour->setCategorie($categorieservice->findById($cour->getCategorieId()));
                $tags =  $this->tagandcourrepo->foundById($cour->getId());
@@ -53,7 +55,9 @@ class CoursService {
                $cour->setTags($arrayoftags);
                $arrayOfCours[] =  $cour ;
         }
+        // var_dump($arrayOfCours);
         return $arrayOfCours ; 
     }
+    
 }
 ?>

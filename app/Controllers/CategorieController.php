@@ -26,6 +26,10 @@ class CategorieController {
     public function findOne($id){
       return   $this->categorieservice->findOne($id);
     }
+    public function modify($id , $name , $description ){
+      $this->categorie->Construct($id , $name , $description);
+      $this->userservice->ModifyCategory($this->categorie);
+    }
 }
 // $cate = new CategorieController ; 
 // var_dump($cate->read());

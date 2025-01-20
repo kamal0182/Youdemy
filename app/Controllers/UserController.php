@@ -11,29 +11,28 @@ use App\Models\Role;
 use App\Models\User;
 use App\Services\UserService as ServicesUserService;
 use Exception;
-
 class UserController {
     private User $user ;
     private ServicesUserService $userservice ;
+
     // private GeneralDao $generalrepository ;
     public function __construct() {
+        $this->user = new User ; 
         $this->userservice = new ServicesUserService();
     }
     public function getAllUsers(){
-        try {
-            $user = new user ;
-          return   $this->userservice->getAllUsers($user);
-         }
-         catch(Exception $e){
-            echo $e->getMessage();
-         }
+       
+          return   $this->userservice->getAllUsers($this->user);
     }
     public function createTag(){
         // $this->userservice->CreateTags($arraytags);
     }
 }
-$tag = new UserController();
-$tag->createTag();
+// $tag = new UserController();
+// // var_dump();
+// foreach($tag->getAllUsers() as $use){
+//    var_dump( $use->getRole());
+// }
 
 
 ?>

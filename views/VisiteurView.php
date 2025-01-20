@@ -6,9 +6,7 @@ use App\Controllers\CoursController;
 // echo dirname(__DIR__, 1) . "../app/Controllers/CoursController.php"; 
 $courses = new CoursController;
 ?>
-
 <html lang="fr">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -42,7 +40,7 @@ $courses = new CoursController;
                     <a class="text-gray-700 hover:text-gray-900" href="#">Enseigner sur Udemy</a>
                     <a class="text-gray-700 hover:text-gray-900" href="#"><i class="fas fa-shopping-cart"></i></a>
                     <a class="text-gray-700 hover:text-gray-900 border border-purple-700 rounded-full py-2 px-4" href="#">Se connecter</a>
-                    <a class="bg-purple-700 text-white rounded-full py-2 px-4" href="Login">S'inscrire</a>
+                    <a class="bg-purple-700 text-white rounded-full py-2 px-4" href="/Login">S'inscrire</a>
                     <a class="text-gray-700 hover:text-gray-900" href="#"><i class="fas fa-globe"></i></a>
                 </nav>
             </div>

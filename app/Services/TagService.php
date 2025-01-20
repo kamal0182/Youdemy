@@ -2,13 +2,12 @@
 namespace App\Services;
 use App\Models\Tag;
 use App\Repositories\GenaraleRepo;
-
 class TagService {
     private Tag $tag ; 
     private  GenaraleRepo $generalrepository ;
-    public function __construct() {
-        $this->generalrepository  = new GenaraleRepo ;
-        $this->tag = new Tag ; 
+    public function __construct(){
+        $this->generalrepository = new GenaraleRepo ;
+        $this->tag = new Tag ;
     }
     public function create($tage){
         if(!empty($tage->getName())){
@@ -16,9 +15,6 @@ class TagService {
                 $id =   $tage->setId($this->generalrepository->create($tage));
                 return $id ;
             }
-        }
-        else{
-            echo "empty tag";
         }
     }
     public function findByName($name){

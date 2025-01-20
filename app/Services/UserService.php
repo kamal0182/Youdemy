@@ -32,8 +32,17 @@ class UserService{
         $this->courservice = new CoursService ;
         $this->categorieservice = new CategorieService ;
     }
-    public function getAllUsers($user){
-       return  $this->generalrepository->getAll($user);
+    public function getAllUsers($users){
+        $arrayusers = [] ;
+        foreach($this->generalrepository->getAll($users) as $user ){
+           $user->setRole($this->roleservice->findById($user->getIdRole()));
+            $arrayusers [] = $user ;
+            echo "<pre>" ;
+            var_dump($user->getRole()->getName());
+        }
+        return $arrayusers ;
+  
+      
         // var_dump($users);
         // foreach($users  as $user){
         //     $User = new User ;
@@ -71,6 +80,9 @@ class UserService{
         public function createInscription(){
             $this->user = new User  ; 
         }
+      public function   ModifyCategory(Categorie $categorie){
+        $this->categorieservice->Modify($categorie) ;
+      }
         // public function CreateTags($arrayofTags){
         //     foreach($arrayofTags as $tag){
         //         $this->tagservice->create($tag);

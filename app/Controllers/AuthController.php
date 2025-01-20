@@ -1,6 +1,5 @@
 <?php
 namespace App\Controllers;
-require_once dirname(__DIR__, 3) ."\\vendor\\autoload.php";
 
 use App\Models\Role;
 use App\Models\User;
@@ -41,7 +40,12 @@ use Exception;
     }
     public function Login($email , $password ){
       try {
-            $this->authservice->checkEmailAndPassword($email , $password) ;
+           $user =  $this->authservice->checkEmailAndPassword($email , $password) ;
+           $_SESSION['user']= $user ;
+           
+          if($_SESSION['user']->getRole()->getName()){
+            require "./Views/AdminView.php";
+          }
       }
       catch(Exception $e){
          return $e->getMessage();

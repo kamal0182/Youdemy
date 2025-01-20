@@ -10,7 +10,7 @@ class ValidationService {
         }
         else {
           return false ;
-                }
+            }
     }
 }
 ?>

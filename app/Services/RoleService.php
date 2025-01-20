@@ -23,6 +23,7 @@ class RoleService {
         return  $this->generalrepository->foundByName($role_name, "roles");
     }
     public function create($role){
+        var_dump($role);
         if(!empty($role->getname())){
             if(!empty($role->getDescription())){
             $role->setId($this->generalrepository->create($role));

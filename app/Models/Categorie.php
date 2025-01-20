@@ -12,7 +12,6 @@ class Categorie extends GeneralDao{
     public function __call($name, $arguments)
     {
         if($name == "Construct"){
-            
             if(count($arguments) == 1 ){
                 $this->name = $arguments[0];
             }

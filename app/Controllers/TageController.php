@@ -14,6 +14,7 @@ class TageController{
     private Tag $tage ; 
     private TagService $tagservice ;
     public function __construct(){
+        $this->tagservice = new TagService ;
         $this->tage = new Tag();
         $this->userservice = new UserService;
     }
@@ -28,6 +29,7 @@ class TageController{
     }
 
 }
-$tage = new TageController();
-$tage->getallTags();
+
+
+// var_dump();
 ?>

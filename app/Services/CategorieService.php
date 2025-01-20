@@ -35,5 +35,9 @@ class CategorieService {
     public function findOne($id){
        return $this->generalrepository->foundById($id,"categorie");
     }
+    public function Modify(Categorie $categorie){
+        $this->generalrepository->Modify($categorie);
+    }
+
 }
 ?> 

@@ -7,17 +7,19 @@ use App\Core\db\Database as DbDatabase;
 use App\Models\Categorie;
 use App\Models\Cours;
 use App\Models\Inscription;
+use App\Models\Role;
 use App\Models\Tag;
 use App\Models\User;
 use PDO;
 
 abstract class GeneralDao {
     private $db ; 
-    private  $classes = ["User"=>User::class,
-                        "Cours"=>Cours::class ,
+    private  $classes = ["user"=>User::class,
+                        "Cour"=>Cours::class ,
                         "categorie"=>Categorie::class ,
                         "Inscription"=>Inscription::class,
-                        "tag"=>Tag::class];
+                        "tag"=>Tag::class,
+                         "Role"=>Role::class];
     abstract public function tableName() ;
     abstract public function columns() : array ; 
     public function checkclass (){
@@ -40,11 +42,14 @@ abstract class GeneralDao {
         // var_dump($this->matchwithclass());
         // fetchALL(PDO::FETCH_CLASS, 'person');
     //    return $stmt->fetchObject($this->checkclass());
-    // var_dump($this->checkclass());
+ 
+  
+    
     // $this->tableName();
      $result =  $stmt->fetchALL(PDO::FETCH_CLASS,$this->checkclass());
      return $result ;
     }
+ 
     public function create(){
         $this->db = (new DbDatabase())->connection();
         $keys = array_keys($this->columns());

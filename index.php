@@ -1,37 +1,20 @@
-<?php 
-// echo "Ascascasc";
-//  require __DIR__ ."./Views/VisiteurView.php";
-// require __DIR__."
-
+<?php
+session_start();
 // use App\Controllers\AuthController;
+require_once dirname(__DIR__) ."\\vendor\\autoload.php";
 
 use App\Controllers\AuthController;
 require __DIR__ ."/app/Controllers/AuthController.php";
-include_once "./views/LoginView.php";
 $request = $_SERVER['REQUEST_URI'];
-// echo $request ;
-// echo $request ;
-// if("/Youdemy-Structer/index.php" == $request ){
-//     echo "!";
-// }
-$auth = new AuthController ; 
+$auth = new AuthController ;
 $cama = '/Youdemy-Structer';
 switch($request){
-    case "/Youdemy-Structer/index.php":
-        if(returntoIndexRoutingValue()==false){
-            require  "/Youdemy-Structer/Views/AdminView.php";
-            echo "kamal";
-            break ;
-        }
-          require  "/Youdemy-Structer/Views/LoginView.php";
+    case "":
+    case "/":
+          require  __DIR__ ."/Views/VisiteurView.php";
           break ;
-        
-    case "/Youdemy-Structer/Views/VisiteurView" :
-        require_once $cama ."Views/Sigup.php";
-        // if(isset($_REQUEST)){
-        //     if(());
-        //     require __DIR__."/Views/AdminView.php";
-        // }
+    case "/Login" :
+        require_once   __DIR__ ."/Views/LoginView.php";
         break ;
         case "Youdemy-Structer/Views/Sigup":
             require $cama."/Views/AdminView.php";

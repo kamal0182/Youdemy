@@ -1,10 +1,11 @@
 <?php 
 namespace App\Controllers;
+require_once dirname(__DIR__, 3) ."\\vendor\\autoload.php";
 
 use App\Models\Role;
 use App\Services\RoleService as ServicesRoleService;
 use Exception;
-use RoleService;
+
 
 // include "./../Models/Role.php";
 // // include "./../Models/User.php";
@@ -25,9 +26,11 @@ class RoleController{
          }
     }
     public function create(){
-        $rolename = "Enseignant";
-        $roledescription = "this is Admin";
+        $rolename = "Etudiant";
+        $roledescription = "this is Etudiant";
         $this->role->constructor($rolename,$roledescription);
+        var_dump($this->role);
+        
        return  $this->RoleService->create($this->role);
     }
 }

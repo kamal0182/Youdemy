@@ -1,9 +1,16 @@
 <?php
 require_once  dirname( __DIR__,1) ."../../vendor/autoload.php";
 use App\Controllers\CategorieController;
+use App\Controllers\CoursController;
 use App\Controllers\TageController;
+use App\Controllers\UserController;
 use App\Models\Tag;
 $categorie = new CategorieController ;
+$tags = new TageController ;
+$users = new UserController ;  
+$courses = new CoursController ;       
+// var_dump();
+
 // if(($_SERVER['REQUEST_METHOD'] == 'POST')){
     // echo "Akascasc";
     // echo $_POST['check'] ;
@@ -64,15 +71,31 @@ $categorie = new CategorieController ;
       <div class="modal-body">
         <form action="" method="post">
             <label for="">Name :</label>
-        <input type="text" id="inputnamecategory"  name="name" style="font-size : bold ; color: black ;"  class="form-control " > 
+        <input type="text" id="inputnamecategory"  name="categoryname" style="font-size : bold ; color: black ;"  class="form-control " > 
         <label for="">Description   :</label>
-       <input type="text"  id="inputdescriptioncategory" name="description" style="font-size : bold ; color: black ;"  class="form-control " >
-       
+       <input type="text"  id="inputdescriptioncategory" name="categorydescription" style="font-size : bold ; color: black ;"  class="form-control " >
+       <input type="hidden" value="" id="idcategory">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a href="./AdminView.php"> <input type="submit" name="check"  value="Submit" class="btn btn-primary"> </a>
+        <button type="submit" name="categorysubmit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="./AdminView.php"> <input type="submit"name="categorysubmit"  value="Submit" class="btn btn-primary"> </a>
         </form> 
+        <?php
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                           
+                           
+            if(isset($_POST['categorysubmit'])){
+             
+                // ($_POST['categoryname'],$_POST['categorydescription']);
+            
+                $_POST['categoryname'] = "";
+                $_POST['categorydescription'] = "";
+                $_POST['categorysubmit'] = "";
+            }
+        }
+        unset($_POST);
+      
+        ?>
       </div>
     </div>
   </div>
@@ -149,17 +172,15 @@ $categorie = new CategorieController ;
                         </a>
                     </li>
                     <?php 
-                    
-                    
                         if($_SERVER['REQUEST_METHOD'] == 'POST'){
                            
                            
                             if(isset($_POST['check'])){
                              
                                 $categorie->create($_POST['name'],$_POST['description']);
-                                // $_POST['name'] = "";
-                                // $_POST['description'] = "";
-                                // $_POST['check'] = "";
+                                $_POST['name'] = "";
+                                $_POST['description'] = "";
+                                $_POST['check'] = "";
                             }
                         }
                         unset($_POST);
@@ -304,7 +325,7 @@ $categorie = new CategorieController ;
                         <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                             <!-- Title -->
                             <h1 class="h2 mb-0 ls-tight">
-                                <img src="https://bytewebster.com/img/logo.png" width="40"> ByteWebster Application</h1>
+                                <img src="https://bytewebster.com/img/logo.png" width="40"><h1><?php echo $_SESSION['user']->getFirstName(); ?></h1>
                         </div>
                         <!-- Actions -->
                         <div class="col-sm-6 col-12 text-sm-end">
@@ -332,14 +353,18 @@ $categorie = new CategorieController ;
                     </div>
                     <!-- Nav -->
                     <ul class="nav nav-tabs mt-4 overflow-x border-0">
-                        <li class="nav-item ">
-                            <a href="#" class="nav-link active">All files</a>
+                        <li class="nav-item"  onclick="showCategories('Users')">
+                            <a href="#" class="nav-link">Users</a>
                         </li>
+                        
                         <li class="nav-item" onclick="showCategories('category')">
-                            <a href="#"  class="nav-link font-regular">Categories</a>
+                            <a href="#"  class="nav-link">Categories</a>
                         </li >
-                        <li onclick="showTags('tags')" class="nav-item">
+                        <li onclick="showCategories('tags')" class="nav-item">
                             <a href="#" class="nav-link font-regular">Tags</a>
+                        </li>
+                        <li onclick="showCategories('Courses')" class="nav-item">
+                            <a href="#" class="nav-link font-regular">Courses</a>
                         </li>
                     </ul>
                 </div>
@@ -446,11 +471,11 @@ $categorie = new CategorieController ;
                 </div>
 <div style="display: flex ; justify-content: space-between ">
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
+    <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Categorie 
     </button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-        Launch demo modal
+    <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+    Add  Tag 
     </button>
 </div>
                 <div class="card shadow border-0 mb-7">
@@ -471,314 +496,7 @@ $categorie = new CategorieController ;
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Jason Martinez
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Feb 15, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://bytewebster.com/img/logo.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="https://www.bytewebster.com/">
-                                            Bytewebster
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $3.500
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-success"></i>Scheduled
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href=""   class="btn btn-sm btn-neutral">Modify</a>
-                                        <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1610271340738-726e199f0258?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Ashley Williams
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Apr 15, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-2.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Netguru
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $2.750
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-warning"></i>Postponed
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1610878722345-79c5eaf6a48c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Melissa Chen
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Mar 20, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-3.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Figma
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $4.200
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-success"></i>Scheduled
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1612422656768-d5e4ec31fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Emily Davis
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Feb 15, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-4.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Mailchimp
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $3.500
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-dark"></i>Not discussed
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Thomas Nguyen
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Apr 10, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-5.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Webpixels
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $1.500
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-danger"></i>Canceled
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Jason Martinez
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Feb 15, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://bytewebster.com/img/logo.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="https://www.bytewebster.com/">
-                                            Bytewebster
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $3.500
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-success"></i>Scheduled
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1610271340738-726e199f0258?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Ashley Williams
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Apr 15, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-2.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Netguru
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $2.750
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-warning"></i>Postponed
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1610878722345-79c5eaf6a48c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Melissa Chen
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Mar 20, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-3.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Figma
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $4.200
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-success"></i>Scheduled
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1612422656768-d5e4ec31fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Emily Davis
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Feb 15, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-4.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Mailchimp
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $3.500
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-dark"></i>Not discussed
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Thomas Nguyen
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Apr 10, 2023
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-5.png" class="avatar avatar-xs rounded-circle me-2">
-                                        <a class="text-heading font-semibold" href="#">
-                                            Webpixels
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $1.500
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-lg badge-dot">
-                                            <i class="bg-danger"></i>Canceled
-                                        </span>
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -807,10 +525,7 @@ $categorie = new CategorieController ;
    
 <script>
     function showCategories(name){
-        console.log("aa");
         if(name == "category"){
-
-        
         document.getElementById("tables").innerHTML = `
        
         <table class="table table-hover table-nowrap">
@@ -829,7 +544,7 @@ $categorie = new CategorieController ;
                                         <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
                                         <a class="text-heading font-semibold" href="#">
                                         <?php echo $category->getName() ;?>
-                                        </a>
+                                        </a>    
                                     </td>
                                     <td id="descriptioncategory">
                                     <?php echo $category->getDescription() ;?>
@@ -837,77 +552,116 @@ $categorie = new CategorieController ;
                                     <td>
                                     <td style="visibility: hidden;"></td>
                                     <td id="idCategory" class="text-end" >
-                                   
-                               
-                                    
-                                    <input   onclick="showModificaionForm()"  data-bs-toggle="modal" data-bs-target="#Modalmodification" value="Modify">
-                                  
+                                    <input  name="id" value="" type="hidden" >
+                                    <button   onclick="showModificaionForm(<?php echo $category->getId() ?>,'<?php echo $category->getName()?>','<?php echo $category->getDescription() ?>')" data-bs-toggle="modal" data-bs-target="#Modalmodification" >Modify                             
+ </button>
                                     <button  type="button"  class="btn btn-sm btn-square btn-neutral text-danger-hover">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </td>
                                 </tr> <?php  ;}?>`
+    }
 
-    }
     if(name  == "tags"){
-        function showTags(){
-   document.getElementById("tables").innerHTML = `
-      <table class="table table-hover table-nowrap">
-                          <thead class="thead-light">
-                              <tr>
-                                  <th scope="col">Name  </th>
-                                  <th scope="col">Description</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                           <?php 
-    $tags = new TageController ;
-                          
-       foreach($tags->getallTags() as $tag){
-      ?>
-                              <tr>
-                                  <td id="namecategory">
-                                      <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                      <a class="text-heading font-semibold" href="#">
-                                      <?php echo $tag->getName() ;?>
-                                      </a>
-                                  </td>
-                                  <td id="descriptioncategory">
-                                  <?php echo $tag->getDescription();?>
-                                  </td>
-                                  <td>
-                                  <td style="visibility: hidden;"></td>
-                                  <td id="idCategory" class="text-end" >
-                                 
-                             
-                                  
-                                  <input   onclick="showModificaionForm()"  data-bs-toggle="modal" data-bs-target="#Modalmodification" value="Modify">
-                                
-                                  <button  type="button"  class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                          <i class="bi bi-trash"></i>
-                                      </button>
-                                  </td>
-                              </tr> <?php  ;}?>`
-   }
-    }
-}
-   
-    function showModificaionForm($id){
-    console.log($id);
-      <?php  if(isset($_GET['submit'])){ 
-              ?> 
-        name =  <?php $_GET['submit'];;?>
        
-     console.log(name)
-     <?php   }    ?>  ;
-       document.getElementById("inputnamecategory").value  = 
-        document.getElementById("inputdescriptioncategory").value  
-     
+       document.getElementById("tables").innerHTML = `
+          <table class="table table-hover table-nowrap">
+                              <thead class="thead-light">
+                                  <tr>
+                                      <th scope="col">Name  </th>
+                                      <th scope="col">Description</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+           <?php                         
+           foreach($tags->getallTags() as $tag){
+          ?>
+                                  <tr>
+                                      <td id="namecategory">
+                                          <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
+                                          <a class="text-heading font-semibold" href="#">
+                                          <?php echo $tag->getName();?>
+                                          </a>
+                                      </td>
+                                      <td id="descriptioncategory">
+                                      <?php echo $tag->getDescription();?>
+                                      </td>
+                                      <td>
+                                      <td style="visibility: hidden;"></td>
+                                      <td id="idCategory" class="text-end" >
+    
+                                      <input     data-bs-toggle="modal" data-bs-target="#Modalmodification" value="Modify">
+                                    
+                                      <button  type="button"  class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                              <i class="bi bi-trash"></i>
+                                          </button>
+                                      </td>
+                                  </tr> <?php  ;}?>`
+       }
+       if(name  == "Courses"){
        
-        // document.getElementById("modalmodificationcategorie").checkVisibility = "visible";
+       document.getElementById("tables").innerHTML = `
+          <table class="table table-hover table-nowrap">
+                              <thead class="thead-light">
+                                  <tr>
+                                      <th scope="col">Name  </th>
+                                      <th scope="col">Description</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+           <?php                         
+           foreach($courses->read() as $cour){
+          ?>
+                                  <tr>
+                                      <td id="namecategory">
+                                          <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
+                                          <a class="text-heading font-semibold" href="#">
+                                          <?php echo $cour->getTittle();?>
+                                          </a>
+                                      </td>
+                                      <td id="descriptioncategory">
+                                      <?php echo $cour->getDescrition();?>
+                                      </td>
+                                       <td id="descriptioncategory">
+                                      <?php echo $cour->getUser()->getFirsName() ." " .$cour->getUser()->getLastName();?>
+                                      </td>
+                                      <td id="descriptioncategory">
+                                      <?php echo $cour->getCategorie()->getName();?>
+                                      </td>
+                                      <td id="descriptioncategory">
+                                      <?php 
+                                       if(empty($cour->getTags())){
+                                        echo "no Tags Found";
+                                       }
+                                       else{
+                                      foreach( $cour->getTags() as $tag) {
+                                        echo $tag->getName();
+                                      }
+                                    };?>
+                                      </td>
+                                      <td>
+                                      <td style="visibility: hidden;"></td>
+                                      <td id="idCategory" class="text-end" >
     
-    
-        
+                                      <input    data-bs-toggle="modal" data-bs-target="#Modalmodification" value="Modify">
+                                    
+                                      <button  type="button"  class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                              <i class="bi bi-trash"></i>
+                                          </button>
+                                      </td>
+                                  </tr> <?php  ;}?>`
+       }
+      
+       
+  
+
+       }
+    function showModificaionForm (id,name ,descr) {
+        console.log(name);
+        document.getElementById("inputnamecategory").value = name ;
+        document.getElementById("inputdescriptioncategory").value = descr ;
+        document.getElementById("idcategory").value = id ;
+
     }
 </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

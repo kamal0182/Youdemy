@@ -14,7 +14,7 @@ class User extends GeneralDao{
     private Role  $role ; 
     private Inscription $inscription ;
     private int $id_role ;
-    private string $situation  ;
+    private string $Station ;
    public function __construct() {
     }
     public function __call($name, $arguments)
@@ -45,7 +45,7 @@ class User extends GeneralDao{
                  $this->email = $arguments[2];
                  $this->password = $arguments[3];
                  $this->role = $arguments[4] ;
-                 $this->situation = $arguments[5];
+                 $this->Station = $arguments[5];
                  $this->photo = $arguments[6];
             }
             if(count($arguments) == 8){
@@ -55,7 +55,7 @@ class User extends GeneralDao{
                  $this->email = $arguments[3];
                  $this->password = $arguments[4];
                  $this->role = $arguments[5] ;
-                 $this->situation = $arguments[6];
+                 $this->Station = $arguments[6];
                  $this->photo = $arguments[7];
             }
             
@@ -72,10 +72,13 @@ class User extends GeneralDao{
     public function columns(): array
     {
        return ["fisrtname"=>$this->fisrtname,"lastname"=>$this->lastname,"email"=>$this->email,"password"=>$this->password,
-    "photo"=>$this->photo,"station"=>$this->situation,"id_role"=>$this->role->getId()];    
+    "photo"=>$this->photo,"station"=>$this->Station,"id_role"=>$this->role->getId()];    
     }
     public function SetId($id){
         $this->id = $id ;
+    }
+    public function getIdRole(){
+        return $this->id_role ; 
     }
     public function SetFirstName($fname){
         $this->fisrtname = $fname ;
@@ -88,6 +91,9 @@ class User extends GeneralDao{
     }
     public function SetPassword($password){
         $this->password = $password ;
+    }
+    public function getStatus(){
+        return $this->Station ;
     }
     public function SetRole(Role $role){
         $this->role = $role ;
@@ -115,7 +121,5 @@ class User extends GeneralDao{
     //     $this->inscriptions = $inscription ; 
     // }
 }
-
-
 
 ?> 

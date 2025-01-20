@@ -1,6 +1,6 @@
 <?php
 use App\Controllers\AuthController;
-include_once "../app/Controllers/AuthController.php";
+
 if($_REQUEST){
   $auth = new AuthController ;
   $erroremail = $auth->Login($_REQUEST['email'] , $_REQUEST['password']);
