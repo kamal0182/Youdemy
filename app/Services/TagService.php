@@ -1,5 +1,7 @@
 <?php
 namespace App\Services;
+ini_set("memory_limit", "7000M");
+
 use App\Models\Tag;
 use App\Repositories\GenaraleRepo;
 class TagService {

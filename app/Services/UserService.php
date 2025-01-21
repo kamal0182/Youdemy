@@ -30,7 +30,7 @@ class UserService{
         $this->generalrepository = new GenaraleRepo ;
         $this->courservice = new CoursService ;
         $this->categorieservice = new CategorieService ;
-        $this->inscripservice = new InscriptionService;
+        // $this->inscripservice = new InscriptionService;
         // $this->isncripservice = new ServicesInscriptionService ; 
         
     }
@@ -85,10 +85,8 @@ class UserService{
         $this->categorieservice->Modify($categorie) ;
       }
       public function getallInscriptionsCourses($inscrip){
-       
        return   $this->inscripservice->findCourses($inscrip);
-        
-
+       
       }
         // public function CreateTags($arrayofTags){
         //     foreach($arrayofTags as $tag){

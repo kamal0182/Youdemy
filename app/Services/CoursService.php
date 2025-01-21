@@ -18,14 +18,17 @@ class CoursService {
         $this->cour = new Cours ;
     }
     public function create($cour){
+        
+
         $cours = $this->generalrepository->create($cour);
-     
-        foreach($cour->getTags() as $tag){  
+        
+        foreach($cour->getTags() as $tag){
+           
              $this->tagandcourrepo->create($cours,$this->tagservice->findByName($tag->getName())->getId());
        }
         }
         public function getAllCourse(){
-            // var_dump($this->generalrepository->getAll($this->cour));
+        
             $courses  =  $this->generalrepository->getAll($this->cour);
             $arrayOfCours = []; 
             foreach($courses as $cour){

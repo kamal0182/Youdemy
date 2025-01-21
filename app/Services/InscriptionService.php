@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
+ini_set("memory_limit", "7000M");
 // memory_limit = "2048M" ;
-// ini_set("memory_limit", "6000M");
 
 use App\Models\Cours;
 use App\Models\User;
@@ -16,10 +16,9 @@ class InscriptionService {
     }
         public function findCourses($inscrip){
        $arrayofinscrip =   $this->generalepository->foundByIdALL($inscrip->getUser()->getId() ,"inscriptions");
-       foreach($arrayofinscrip as $oneinsc){
-        $oneinsc->setUser($this->userservice->findUserById($oneinsc->getUserId()));
-       var_dump($oneinsc->getUser());
-       }
+    //    foreach($arrayofinscrip as $oneinsc){
+    //     $oneinsc->setUser($this->userservice->findUserById($oneinsc->getUserId()));
+    // //    var_dump($oneinsc->getUser());
+    //    }
     }
 }
-?>
