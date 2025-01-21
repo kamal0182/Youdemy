@@ -1,6 +1,6 @@
 <?php 
 namespace App\Services;
-
+ini_set("memory_limit", "3000M");
 use App\Models\Categorie;
 use App\Repositories\GenaraleRepo;
 

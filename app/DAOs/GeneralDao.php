@@ -21,7 +21,7 @@ abstract class GeneralDao {
                         "tag"=>Tag::class,
                          "Role"=>Role::class];
     abstract public function tableName() ;
-    abstract public function columns() : array ; 
+    abstract public function columns() : array ;
     public function checkclass (){
         foreach($this->classes as $key=>$value){
             if($this->tableName() == $key){
@@ -39,26 +39,18 @@ abstract class GeneralDao {
         $sql = "SELECT  * from {$this->matchwithclass()}";
         $stmt =  $this->db->connection()->prepare($sql);
         $stmt->execute();
-        // var_dump($this->matchwithclass());
-        // fetchALL(PDO::FETCH_CLASS, 'person');
-    //    return $stmt->fetchObject($this->checkclass());
- 
-  
-    
-    // $this->tableName();
      $result =  $stmt->fetchALL(PDO::FETCH_CLASS,$this->checkclass());
      return $result ;
     }
  
     public function create(){
         $this->db = (new DbDatabase())->connection();
+        var_dump($this->db); 
         $keys = array_keys($this->columns());
         $joincloumn = implode(",",$keys);
         $arrValues = array_values($this->columns());
         $joincloumn1 = implode("','",$arrValues);
-        $tablename = $this->tableName();
         $sql = "INSERT INTO {$this->matchwithclass()} ( {$joincloumn}) values ('{$joincloumn1}')" ;
-        
         $stmt =  $this->db->prepare($sql);
         $stmt->execute();
         return  $this->db->lastInsertId();
@@ -66,13 +58,18 @@ abstract class GeneralDao {
     public function delete(){
 
     }
-    public function update(){
+    public function update($id){
+        $this->db = (new DbDatabase())->connection();
         $updatearray = [];
         foreach($this->columns() as $key=>$value){
             $updatearray []  =  $key  ." = '" .$value ."'";
         }
+        $matchwithquery = implode(" , ",$updatearray);
+        $sql  = "UPDATE  {$this->matchwithclass()}   SET $matchwithquery WHERE id = " .$id .";"; 
+        $stmt =  $this->db->prepare($sql);
+         $stmt->execute();
+         $result = $stmt->fetchObject($this->checkclass());
     }
-     
 }
 
 

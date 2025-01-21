@@ -2,9 +2,11 @@
 namespace App\Models;
 
 class Inscription {
-    private int  $id ; 
+    
     private Cours $cour ;
     private User $Etudiants ;
+    private $user_id ; 
+    private $cour_id ;
     public function __construct() 
     {
         // $this->cour = $cours ; 
@@ -18,6 +20,26 @@ class Inscription {
                 $this->Etudiants = $arguments[1];
             }
         }
+        if($name == "ConstWithUser"){
+            if(count($arguments) == 1 ){
+                $this->Etudiants = $arguments[0];
+                // $this-> = $arguments[1];
+            }
+        }
+        if($name == "ConstWithCour"){
+            if(count($arguments) == 1 ){
+                $this->cour = $arguments[0];
+                // $this-> = $arguments[1];
+            }
+        }
+    }
+    public function getUserId(){
+        return $this->user_id;
+
+    }
+    public function getCourId(){
+        return $this->cour_id;
+        
     }
     public function SetUser( User $Etudiants){
         $this->Etudiants = $Etudiants ;
@@ -26,12 +48,7 @@ class Inscription {
     public function SetCour( Cours $cour){
         $this->cour = $cour ;
     }
-    public function SetId($id){
-        $this->id = $id ;
-    }
-    public function getId(){
-        return $this->id ;
-    }
+   
     public function getUser(){
         return $this->Etudiants;
     }

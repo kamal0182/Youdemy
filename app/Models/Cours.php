@@ -33,7 +33,12 @@ class Cours extends GeneralDao{
                 $this->tags = $arguments[6];
             }
         }
+        if($name == "createInstanceWithUser"){
+            if(count($arguments) == 1 ){
+                $this->Enseignant = $arguments[0];
         
+    }
+}
     }
     public function tableName():string
     {

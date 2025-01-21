@@ -1,5 +1,6 @@
 <?php 
 namespace App\Controllers;
+require_once dirname(__DIR__, 3) ."\\vendor\\autoload.php";
 
 
 use App\Models\Categorie;
@@ -15,7 +16,7 @@ class CategorieController {
         $this->categorie = new Categorie ;
         $this->categorieservice = new CategorieService ;
     }
-    public function create($name , $description){
+    public function create($name , $description ){
         $this->categorie->Construct($name,$description);
         $this->userservice->createCategorie($this->categorie);
     }
@@ -26,12 +27,14 @@ class CategorieController {
     public function findOne($id){
       return   $this->categorieservice->findOne($id);
     }
-    public function modify($id , $name , $description ){
+    public function modify($id = "1" , $name = "madrid" , $description="this is madrid" ){
       $this->categorie->Construct($id , $name , $description);
       $this->userservice->ModifyCategory($this->categorie);
+      // echo "AScascasc";
     }
 }
-// $cate = new CategorieController ; 
-// var_dump($cate->read());
+$cate = new CategorieController ; 
+$cate->modify(1,"madrid","rca");
+// var_dump();
 
 ?>

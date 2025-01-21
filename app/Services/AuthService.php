@@ -18,7 +18,7 @@ class AuthService extends  ValidationService {
     public function  checkEmailAndPassword($email , $password) {
         if($this->validatioEmail($email)){
             $user = $this->generalrepository->findEmailAndPassword($email,$password);
-            if(  $user->getFirstName()!= null  ){
+            if(  $user->getFirstName()!= null ){
                $user->SetRole($this->roleservice->findById($user->getIdRole()));
                return $user ;
             }

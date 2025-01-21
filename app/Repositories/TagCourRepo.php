@@ -1,6 +1,6 @@
 <?php 
 namespace App\Repositories;
-
+ini_set('memory_limit', '2048M');
 use App\Core\db\Database;
 use App\DAOs\TagCourDao;
 use PDO;
@@ -20,7 +20,7 @@ class TagCourRepo {
      
         $this->db = new Database();
         $sql = "SELECT tag_id  FROM tagcours WHERE cour_id   = " .$id .";" ;
-        // echo $sql ;
+       
         $stmt =  $this->db->connection()->prepare($sql);
          $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);

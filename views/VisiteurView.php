@@ -47,7 +47,6 @@ $courses = new CoursController;
         </div>
     </header>
 <!--
-  Heads up! 👋
 
   This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
 -->

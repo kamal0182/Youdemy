@@ -2,6 +2,7 @@
 require_once  dirname( __DIR__,1) ."../../vendor/autoload.php";
 use App\Controllers\CategorieController;
 use App\Controllers\CoursController;
+use App\Models\User;
 use App\Controllers\TageController;
 use App\Controllers\UserController;
 use App\Models\Tag;
@@ -69,32 +70,19 @@ $courses = new CoursController ;
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="/Auth/Cate" method="post">
             <label for="">Name :</label>
         <input type="text" id="inputnamecategory"  name="categoryname" style="font-size : bold ; color: black ;"  class="form-control " > 
         <label for="">Description   :</label>
        <input type="text"  id="inputdescriptioncategory" name="categorydescription" style="font-size : bold ; color: black ;"  class="form-control " >
-       <input type="hidden" value="" id="idcategory">
+       <input type="hidden" name="idinput" value="" id="idcategoryupdated">
       </div>
       <div class="modal-footer">
-        <button type="submit" name="categorysubmit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a href="./AdminView.php"> <input type="submit"name="categorysubmit"  value="Submit" class="btn btn-primary"> </a>
+        <button   class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <input   type="submit"name="categorysubmit"  value="Submit" class="btn btn-primary"> </a>
         </form> 
         <?php
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                           
-                           
-            if(isset($_POST['categorysubmit'])){
-             
-                // ($_POST['categoryname'],$_POST['categorydescription']);
-            
-                $_POST['categoryname'] = "";
-                $_POST['categorydescription'] = "";
-                $_POST['categorysubmit'] = "";
-            }
-        }
-        unset($_POST);
-      
+     
         ?>
       </div>
     </div>
@@ -196,7 +184,7 @@ $courses = new CoursController ;
                     ?>  
 
 ?>
-                    <li class="nav-item">
+                    <li class="nav-item">-
                         <a class="nav-link" href="#">
                             <i class="bi bi-chat"></i> Messages
                             <span class="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">6</span>
@@ -303,8 +291,7 @@ $courses = new CoursController ;
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="bi bi-person-square"></i> Account
-                        </a>
+                            <i class="bi bi-person-square"></i> Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="return confirm('Are you sure you want to logout?')">
@@ -325,7 +312,7 @@ $courses = new CoursController ;
                         <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                             <!-- Title -->
                             <h1 class="h2 mb-0 ls-tight">
-                                <img src="https://bytewebster.com/img/logo.png" width="40"><h1><?php echo $_SESSION['user']->getFirstName(); ?></h1>
+                                <img src="https://bytewebster.com/img/logo.png" width="40"><h1></h1>
                         </div>
                         <!-- Actions -->
                         <div class="col-sm-6 col-12 text-sm-end">
@@ -660,7 +647,7 @@ $courses = new CoursController ;
         console.log(name);
         document.getElementById("inputnamecategory").value = name ;
         document.getElementById("inputdescriptioncategory").value = descr ;
-        document.getElementById("idcategory").value = id ;
+        document.getElementById("idcategoryupdated").value = id ;
 
     }
 </script>

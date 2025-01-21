@@ -1,44 +1,45 @@
 <?php
 namespace App\Services;
+ini_set("memory_limit", "4000M");
 
 use App\Models\Categorie;
 use App\Models\Cours;
-use App\Models\Tag;
+
 use App\Models\User;
 use App\Repositories\GenaraleRepo;
+use App\Services\InscriptionService as ServicesInscriptionService;
 use App\Services\RoleService as ServicesRoleService;
-use App\Services\TagService as ServicesTagService;
 
 
-// include_once "RoleService.php";
-// require_once "../Models/User.php";
-// include_once "./TagService.php";
-// include_once "../Repositories/GenaralRepo.php";
 class UserService{
     private User $user ;
     private Cours $cour ;
     private ServicesRoleService $roleservice ; 
-    private ServicesTagService $tagservice ; 
+    private TagService $tagservice ; 
     private CategorieService $categorieservice  ; 
     private CoursService $courservice ; 
-    private array $tags ; 
+    // private array $tags ; 
+    // private ServicesInscriptionService  $isncripservice ;
+    private ServicesInscriptionService $inscripservice ;
 
     private GenaraleRepo $generalrepository ;
     public function __construct(){
-        $this->user = new User ;
+        // $this->user = new User ;
         $this->tagservice = new TagService();
         $this->roleservice = new RoleService ;
         $this->generalrepository = new GenaraleRepo ;
         $this->courservice = new CoursService ;
         $this->categorieservice = new CategorieService ;
+        $this->inscripservice = new InscriptionService;
+        // $this->isncripservice = new ServicesInscriptionService ; 
+        
     }
     public function getAllUsers($users){
         $arrayusers = [] ;
         foreach($this->generalrepository->getAll($users) as $user ){
            $user->setRole($this->roleservice->findById($user->getIdRole()));
             $arrayusers [] = $user ;
-            echo "<pre>" ;
-            var_dump($user->getRole()->getName());
+           
         }
         return $arrayusers ;
   
@@ -82,6 +83,12 @@ class UserService{
         }
       public function   ModifyCategory(Categorie $categorie){
         $this->categorieservice->Modify($categorie) ;
+      }
+      public function getallInscriptionsCourses($inscrip){
+       
+       return   $this->inscripservice->findCourses($inscrip);
+        
+
       }
         // public function CreateTags($arrayofTags){
         //     foreach($arrayofTags as $tag){

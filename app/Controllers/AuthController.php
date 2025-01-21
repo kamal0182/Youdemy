@@ -10,11 +10,9 @@ use Exception;
     private AuthService $authservice ;
     public function __construct() {
         $this->authservice = new AuthService() ; 
-        
     } 
     public function createUser($firstname , $lastname , $email , $password ,$photo , $rolename ){
       if(isset($_REQUEST['submit'])){
-
          $firstname = $_REQUEST['firstname'];
          echo $firstname ;
       }
@@ -42,10 +40,7 @@ use Exception;
       try {
            $user =  $this->authservice->checkEmailAndPassword($email , $password) ;
            $_SESSION['user']= $user ;
-           
-          if($_SESSION['user']->getRole()->getName()){
-            require "./Views/AdminView.php";
-          }
+         
       }
       catch(Exception $e){
          return $e->getMessage();
