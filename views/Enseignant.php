@@ -13,11 +13,6 @@ $tags = new TageController;
 $users = new UserController;
 $courses = new CoursController;
 
-// var_dump();
-
-// if(($_SERVER['REQUEST_METHOD'] == 'POST')){
-// echo "Akascasc";
-// echo $_POST['check'] ;
 
 
 ?>
@@ -51,7 +46,7 @@ $courses = new CoursController;
     <!-- Dashboard -->
     <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
         <!-- Vertical Navbar -->
-
+         <h1><?php $_SESSION['user']->getFirstName()?></h1>
 
         <!-- Push content down -->
         <div class="mt-auto"></div>
@@ -157,44 +152,6 @@ $courses = new CoursController;
     </div> 
 </div>
 </div>
-    
-    <!-- Main content -->
-
-  
-
-
-   
-        <!-- <header class="bg-surface-primary border-bottom pt-6">
-            <div class="container-fluid">
-                <div class="mb-npx">
-                    <div class="row align-items-center">
-                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
-                           
-                            <h1 class="h2 mb-0 ls-tight">
-                                <img src="https://bytewebster.com/img/logo.png" width="40">
-                                <h1></h1>
-                        </div>
-                    
-                        <div class="col-sm-6 col-12 text-sm-end">
-                            <div class="mx-n1">
-                                <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
-                                    <span class=" pe-2">
-                                        <i class="bi bi-pencil"></i>
-                                    </span>
-                                    <span>Edit</span>
-                             
-                                    <span class=" pe-2">
-                                        <i class="bi bi-gear-wide-connected"></i>
-                                    </span>
-                                    <span>Manage</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Nav -->
-                    
-                 -->
-        <!-- Header -->
         <header class="bg-surface-primary border-bottom pt-6">
             <div class="container-fluid">
                 <div class="mb-npx">
@@ -257,7 +214,7 @@ $courses = new CoursController;
     <script> 
          function showCategories(name){
         if(name == "My Courses"){
-        document.getElementById("coursescontainer").innerHTML = `  <?php  ?>        <?php foreach ($users->showMyCourses(14) as $cour) { ?>
+        document.getElementById("coursescontainer").innerHTML = `  <?php  ?>        <?php foreach ($users->showMyCourses($_SESSION['user']->getId()) as $cour) { ?>
                 <div class="ab bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl ">
     <div class="w-full h-56 bg-gray-300">
         <img src="<?php $cour->getLogo()?>" class="w-full h-full object-cover">
